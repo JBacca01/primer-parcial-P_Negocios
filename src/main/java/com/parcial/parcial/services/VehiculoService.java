@@ -12,4 +12,7 @@ public interface VehiculoService {
     List<Vehiculo> allVehiculos();
 
     Boolean updateVehiculo(Long id, Vehiculo vehiculo);
+
+    Boolean deleteVehiculo(Long id, Vehiculo vehiculo);
 }
+

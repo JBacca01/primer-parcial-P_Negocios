@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class VehiculoServiceImp implements VehiculoService {
     @Autowired
-    private static VehiculoRepository vehiculoRepository;
+    private VehiculoRepository vehiculoRepository;
 
     @Override
     public  Vehiculo getVehiculo(Long id){
@@ -26,6 +26,7 @@ public class VehiculoServiceImp implements VehiculoService {
             vehiculoRepository.save(vehiculo);
             return true;
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -51,6 +52,25 @@ public class VehiculoServiceImp implements VehiculoService {
             vehiculoBD.setPrice( vehiculo.getPrice());
             vehiculoBD.setAvailability( vehiculo.getAvailability());
             Vehiculo vehiculoUp =  vehiculoRepository.save(vehiculoBD);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public Boolean deleteVehiculo(Long id, Vehiculo vehiculo) {
+        try {
+
+
+            Vehiculo vehiculoBD = vehiculoRepository.findById(id).get();
+
+            vehiculoBD.setCar(vehiculoBD.getCar());
+            vehiculoBD.setCar_model( vehiculo.getCar_model());
+            vehiculoBD.setCar_color( vehiculo.getCar_color());
+            vehiculoBD.setCar_model_year( vehiculo.getCar_model_year());
+            vehiculoBD.setCar_vin( vehiculo.getCar_vin());
+            vehiculoBD.setPrice( vehiculo.getPrice());
+            vehiculoBD.setAvailability( vehiculo.getAvailability());
+            Vehiculo vehiculoDe =  vehiculoRepository.save(vehiculoBD);
             return true;
         }catch (Exception e){
             return false;

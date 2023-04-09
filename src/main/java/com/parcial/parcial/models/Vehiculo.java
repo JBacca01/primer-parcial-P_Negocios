@@ -10,7 +10,7 @@ public class Vehiculo {
     private String car;
     private String car_model;
     private String car_color;
-    private int car_model_year;
+    private String car_model_year;
     private String car_vin;
     private String price;
     private String availability;
