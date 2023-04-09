@@ -7,9 +7,12 @@ import java.util.List;
 public interface VehiculoService {
     Vehiculo getVehiculo(Long id);
 
-    Boolean createVehiculo(Vehiculo vehiculo);
+    Boolean createVehiculo(Long vehiculo);
 
     List<Vehiculo> allVehiculos();
 
     Boolean updateVehiculo(Long id, Vehiculo vehiculo);
+
+
 }
+
