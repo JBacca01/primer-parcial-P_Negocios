@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,42 +16,60 @@ import java.util.Optional;
 @RestController
 public class VehiculoController {
     @Autowired
-    private VehiculoServiceImp vehiculoServiceImp;
-    @GetMapping(value = "vehiculo/{id}")
-    public ResponseEntity fi(@PathVariable long id){
+    private VehiculoServiceImp VehiculoServiceImp;
+    @GetMapping(value = "vehicular/{id}")
+    public ResponseEntity findVehicularById(@PathVariable Long id){
 
         Map response = new HashMap();
         try {
-            return new ResponseEntity(vehiculoServiceImp.getVehiculo(id), HttpStatus.OK);
+            return new ResponseEntity(VehiculoServiceImp.getVehiculo(id), HttpStatus.OK);
         }catch(Exception e){
             response.put("status","404");
-            response.put("messager","No se encontro el Vehiculo");
+            response.put("message","No se encontro el Vehiculo");
             return  new ResponseEntity(response,HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping(value = "/vehiculo")
+    @PostMapping(value = "/vehicular")
     public ResponseEntity saveVehiculo(@RequestBody Vehiculo vehiculo){
         Map response = new HashMap();
-        Boolean userResp = vehiculoServiceImp.createVehiculo(vehiculo);
+        Boolean userResp = VehiculoServiceImp.createVehiculo(vehiculo);
         if(userResp == true){
             response.put("status","201");
-            response.put("messager","se registro el Vehiculo");
+            response.put("message","se registro el Vehiculo");
             return  new ResponseEntity(response,HttpStatus.CREATED);
         }
         response.put("status","400");
-        response.put("messager","Hubo un error al registrar el Vehiculo");
+        response.put("message","Hubo un error al registrar el Vehiculo");
         return  new ResponseEntity(response,HttpStatus.BAD_REQUEST);
     }
-    @GetMapping(value = "vehiculo")
+    @GetMapping(value = "vehicular")
     public ResponseEntity allvehiculo(){
 
         Map response = new HashMap();
         try {
-            return new ResponseEntity(vehiculoServiceImp.allVehiculos(), HttpStatus.OK);
+            return new ResponseEntity(VehiculoServiceImp.allVehiculos(), HttpStatus.OK);
         }catch(Exception e){
             response.put("status","404");
             response.put("messager","No hay Vehiculos");
             return  new ResponseEntity(response,HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping(value = "/user/{id}")
+    public ResponseEntity updateVehiculo(@PathVariable Long id, @RequestBody Vehiculo vehiculo) {
+        Map response = new HashMap();
+        Boolean vehiculoDB = VehiculoServiceImp.updateVehiculo(id, vehiculo);
+        try {
+            if (vehiculoDB == null) {
+                response.put("status", "201");
+                response.put("message", "se creo encontro usuarios");
+                return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity(VehiculoServiceImp.getVehiculo(id), HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            response.put("status", "201");
+            response.put("message", "se encontro usuario");
+            return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
     }
 }
