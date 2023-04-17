@@ -25,7 +25,7 @@ public class VehiculoController {
             return new ResponseEntity(VehiculoServiceImp.getVehiculo(id), HttpStatus.OK);
         }catch(Exception e){
             response.put("status","404");
-            response.put("message","No se encontro el Vehiculo");
+            response.put("message","No se encontro el Vehiculo en la BD");
             return  new ResponseEntity(response,HttpStatus.NOT_FOUND);
         }
     }
@@ -39,7 +39,7 @@ public class VehiculoController {
             return  new ResponseEntity(response,HttpStatus.CREATED);
         }
         response.put("status","400");
-        response.put("message","Hubo un error al registrar el Vehiculo");
+        response.put("message","Hubo un error al registrar el Vehiculo en la DB");
         return  new ResponseEntity(response,HttpStatus.BAD_REQUEST);
     }
     @GetMapping(value = "vehicular")
@@ -50,7 +50,7 @@ public class VehiculoController {
             return new ResponseEntity(VehiculoServiceImp.allVehiculos(), HttpStatus.OK);
         }catch(Exception e){
             response.put("status","404");
-            response.put("messager","No hay Vehiculos registrados");
+            response.put("message","No hay Vehiculos registrados en la BD");
             return  new ResponseEntity(response,HttpStatus.NOT_FOUND);
         }
     }
