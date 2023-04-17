@@ -50,7 +50,7 @@ public class VehiculoController {
             return new ResponseEntity(VehiculoServiceImp.allVehiculos(), HttpStatus.OK);
         }catch(Exception e){
             response.put("status","404");
-            response.put("messager","No hay Vehiculos");
+            response.put("messager","No hay Vehiculos registrados");
             return  new ResponseEntity(response,HttpStatus.NOT_FOUND);
         }
     }
