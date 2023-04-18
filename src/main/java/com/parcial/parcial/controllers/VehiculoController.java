@@ -66,13 +66,13 @@ public class VehiculoController {
         try {
             if (vehiculoDB == null) {
                 response.put("status", "201");
-                response.put("massage", "se creo encontro usuario");
+                response.put("massage", "se actualizo el usuario");
                 return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity(vehiculoServiceImp.getVehiculo(id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             response.put("status", "201");
-            response.put("massage", "se creo encontro usuario");
+            response.put("massage", "se no se pudo actuaalizar el usuario");
             return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
     }
