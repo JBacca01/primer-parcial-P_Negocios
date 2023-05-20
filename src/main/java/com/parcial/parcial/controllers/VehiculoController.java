@@ -17,6 +17,11 @@ public class VehiculoController {
     @Autowired
     private VehiculoServiceImp vehiculoServiceImp;
 
+    public void VehiculoControllers(VehiculoServiceImp vehiculoServiceImp) {
+
+        this.vehiculoServiceImp = vehiculoServiceImp;
+    }
+
     public VehiculoController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -38,6 +43,13 @@ public class VehiculoController {
         System.out.println(vehiculo);
         Map response = new HashMap();
         Boolean userResp = vehiculoServiceImp.createVehiculo(vehiculo.getId());
+
+        Long id = vehiculo.getId();
+
+        if (vehiculoServiceImp.validarId(id)) {
+            return ResponseEntity.badRequest().body("El ID ya existe");
+        }
+
         if(userResp == true){
             response.put("status","201");
             response.put("messager","se registro el Vehiculo");

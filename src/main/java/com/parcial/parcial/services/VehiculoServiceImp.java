@@ -74,7 +74,7 @@ public class VehiculoServiceImp implements VehiculoService {
             vehiculoBD.setCar_model( vehiculo.getCar_model());
             vehiculoBD.setCar_color( vehiculo.getCar_color());
             vehiculoBD.setCar_model_year( vehiculo.getCar_model_year());
-            vehiculoBD.setCar_vin( vehiculo.getCar_vin());
+            //vehiculoBD.setCar_vin( vehiculo.getCar_vin());
             vehiculoBD.setPrice( vehiculo.getPrice());
             vehiculoBD.setAvailability( vehiculo.getAvailability());
             Vehiculo vehiculoDe =  vehiculoRepository.save(vehiculoBD);
@@ -83,4 +83,8 @@ public class VehiculoServiceImp implements VehiculoService {
             return false;
         }
     }
+
+    public boolean validarId(Long id) {
+        return vehiculoRepository.existsById(id);
+}
 }
