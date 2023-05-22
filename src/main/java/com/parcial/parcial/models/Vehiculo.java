@@ -13,4 +13,7 @@ public class Vehiculo {
     private String car_vin;
     private String price;
     private String availability;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 }

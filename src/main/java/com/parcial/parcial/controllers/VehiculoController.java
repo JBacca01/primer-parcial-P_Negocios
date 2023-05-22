@@ -40,7 +40,7 @@ public class VehiculoController {
     }
     @PostMapping(value = "/vehiculo")
     public ResponseEntity saveVehiculo(@RequestBody Vehiculo vehiculo){
-        System.out.println(vehiculo);
+        System.out.println(vehiculo.getUser());
         Long id = vehiculo.getId();
 
         if (vehiculoServiceImp.validarId(id)) {
@@ -48,7 +48,7 @@ public class VehiculoController {
         }
 
         Map response = new HashMap();
-        Boolean userResp = vehiculoServiceImp.createVehiculo(vehiculo.getId());
+        Boolean userResp = vehiculoServiceImp.createVehiculo(vehiculo.getId(),vehiculo.getUser());
 
         if(userResp == true){
             response.put("status","201");

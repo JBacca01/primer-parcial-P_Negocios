@@ -1,12 +1,14 @@
 package com.parcial.parcial.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.parcial.parcial.models.User;
 import com.parcial.parcial.models.Vehiculo;
 import com.parcial.parcial.repository.VehiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 
 import java.util.List;
 
@@ -23,13 +25,15 @@ public class VehiculoServiceImp implements VehiculoService {
         return vehiculoRepository.findById(id).get();
     }
 
+
     @Override
-    public Boolean createVehiculo(Long id) {
+    public Boolean createVehiculo(Long id, User user) {
         try {
             String baseUrl = "https://myfakeapi.com/api/cars/";
             ResponseEntity<String> response = restTemplate.getForEntity(baseUrl.concat(String.valueOf(id)), String.class);
             ObjectMapper objectMapper = new ObjectMapper();
             Vehiculo vehiculo = objectMapper.readValue(response.getBody().substring(7), Vehiculo.class);
+            vehiculo.setUser(user);
             vehiculoRepository.save(vehiculo);
             return true;
         }catch (Exception e){
