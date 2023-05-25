@@ -1,6 +1,12 @@
 package com.parcial.parcial.models;
-import jakarta.persistence.*;
+
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 @Data
 @Entity
 public class Vehiculo {

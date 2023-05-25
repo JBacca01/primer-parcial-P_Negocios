@@ -48,39 +48,29 @@ public class UserController {
     }
     // TAREA
     @GetMapping(value = "")
-    public ResponseEntity allUsers(){
+    public ResponseEntity allUsers() {
         try {
-            apiResponse = new ApiResponse(Constants.REGISTER_LIST,userService.allUsers());
+            apiResponse = new ApiResponse(Constants.REGISTER_LIST, userService.allUsers());
             return new ResponseEntity(apiResponse, HttpStatus.OK);
-        }catch(Exception e){
-            apiResponse = new ApiResponse(Constants.REGISTER_NOT_FOUND,"");
-            return new ResponseEntity<>(apiResponse,HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            apiResponse = new ApiResponse(Constants.REGISTER_NOT_FOUND, "");
+            return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
         }
- /*
+    }
         @PutMapping(value = "/{id}")
         public ResponseEntity updateUser(@PathVariable Long id, @RequestBody User user) {
-            Boolean userDB = userServiceImp.updateUser(id, user);
+            Boolean userDB = userService.updateUser(id, user);
             try {
                 if (userDB == null) {
-                    apiResponse = new ApiResponse(Constants.REGISTER_UPDATED,"");
+                    apiResponse = new ApiResponse(Constants.REGISTER_NOT_FOUND, "");
+
                     return new ResponseEntity(apiResponse, HttpStatus.BAD_REQUEST);
                 }
-                return new ResponseEntity(userServiceImp.getUser(id), HttpStatus.ACCEPTED);
+                apiResponse = new ApiResponse(Constants.REGISTER_UPDATED, userService.getUser(id));
+                return new ResponseEntity(apiResponse, HttpStatus.ACCEPTED);
             } catch (Exception e) {
-                response.put("status", "201");
-                response.put("message", "se encontro usuario");
-                return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+                apiResponse = new ApiResponse(Constants.REGISTER_BAD, user);
+                return new ResponseEntity(apiResponse, HttpStatus.BAD_REQUEST);
             }
         }
-
-  */
-
     }
-
-
-
-
-
-
-
-}
