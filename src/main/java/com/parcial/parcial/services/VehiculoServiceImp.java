@@ -55,14 +55,15 @@ public class VehiculoServiceImp implements VehiculoService {
 
             Vehiculo vehiculoBD = vehiculoRepository.findById(id).get();
 
-            vehiculoBD.setCar(vehiculoBD.getCar());
+            vehiculoBD.setCar(vehiculo.getCar());
             vehiculoBD.setCar_model( vehiculo.getCar_model());
             vehiculoBD.setCar_color( vehiculo.getCar_color());
             vehiculoBD.setCar_model_year( vehiculo.getCar_model_year());
-            vehiculoBD.setCar_vin( vehiculo.getCar_vin());
+            //vehiculoBD.setCar_vin( vehiculo.getCar_vin());
             vehiculoBD.setPrice( vehiculo.getPrice());
             vehiculoBD.setAvailability( vehiculo.getAvailability());
             Vehiculo vehiculoUp =  vehiculoRepository.save(vehiculoBD);
+            System.out.println(vehiculoUp);
             return true;
         }catch (Exception e){
             return false;

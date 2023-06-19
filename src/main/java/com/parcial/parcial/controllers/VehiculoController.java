@@ -18,6 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/vehiculo")
+@CrossOrigin
 public class VehiculoController {
 
     private final RestTemplate restTemplate;
